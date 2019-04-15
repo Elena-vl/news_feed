@@ -2,8 +2,11 @@
 
 {% block content %}
 <h1 class="cover-heading">Это сайт с не очень интересными новостями.</h1>
-<h4>Если хочешь больше контента, то необходимо авторизоваться.</h4>
-
+{% if user.is_authenticated %}
+    <h4>Привет, {{user}}.</h4>
+{% else %}
+    <h4>Если хочешь больше контента, то необходимо авторизоваться.</h4>
+{% endif %}
 <!--{% include "mainApp/includes/some_html.html" %}-->
 
 {% endblock %}

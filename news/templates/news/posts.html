@@ -2,6 +2,7 @@
 
 {% block content %}
 	{% for post in news_list %}
+		<h1>{{post.category}}</h1>
 		<a href="/news/{{post.id}}"><h3>{{post.title}}</h3></a>
 		<h5>{{post.pub_date|date:"d-m-Y"}}</h5>
 	{% endfor %}

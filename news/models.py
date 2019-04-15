@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
+    def __str__(self):
+        return self.title
 
 class Articles(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

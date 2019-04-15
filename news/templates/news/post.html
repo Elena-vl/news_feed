@@ -2,8 +2,8 @@
 
 {% block content %}
 <h2 class="text-info">
-	{{object.title}}
+	{{article.title}}
 </h2>
-<h6 class="text-info">Опубликовано: {{object.pub_date|date:"d-m-Y в H:i:s"}}</h6>
-<p>{{object.text|safe|linebreaks}}</p>
+<h6 class="text-info">Опубликовано: {{article.pub_date|date:"d-m-Y в H:i:s"}}</h6>
+<p>{{article.text|safe|linebreaks}}</p>
 {% endblock %}

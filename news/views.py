@@ -17,11 +17,6 @@ class IndexView(generic.ListView):
         """Return the last 20 published news."""
         return Articles.objects.all().order_by("-pub_date")[:20]
 
-class ArticleDetailView(DetailView):
-    model = Articles
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-    # model = Articles
-    # template_name = 'news/post.html'
+def detail(request, article_id):
+    article = get_object_or_404(Articles, pk=article_id)
+    return render(request, 'news/post.html', {'article': article})
