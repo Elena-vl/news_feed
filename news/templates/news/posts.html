@@ -1,9 +1,14 @@
 {% extends "mainApp/wrapper.html" %}
 
 {% block content %}
-	{% for post in news_list %}
-		<h1>{{post.category}}</h1>
-		<a href="/news/{{post.id}}"><h3>{{post.title}}</h3></a>
-		<h5>{{post.pub_date|date:"d-m-Y"}}</h5>
-	{% endfor %}
+	{% if сategory_list %}
+		{% for сategory in сategory_list %}
+			<h1>{{сategory.title}}</h1>
+			{% for article in сategory.articles_set.all %}
+				<a href="/news/{{article.id}}"><h3>{{article.title}}</h3></a>
+			{% endfor %}
+		{% endfor %}
+	{% else %}
+		<h1>Список новостей пока пуст, но может вы можете это иисправить?</h1>
+	{% endif %}
 {% endblock %}

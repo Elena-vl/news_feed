@@ -11,11 +11,10 @@ from django.contrib.auth.decorators import login_required
 
 class IndexView(generic.ListView):
     template_name = 'news/posts.html'
-    context_object_name = 'news_list'
+    context_object_name = 'сategory_list'
 
     def get_queryset(self):
-        """Return the last 20 published news."""
-        return Articles.objects.all().order_by("-pub_date")[:20]
+        return Category.objects.all()
 
 def detail(request, article_id):
     article = get_object_or_404(Articles, pk=article_id)
