@@ -6,12 +6,15 @@ from django.views import generic
 from django.views.generic.detail import DetailView
 from .models import Category, Articles
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # @login_required(login_url='/accounts/login/')
 
 class IndexView(generic.ListView):
     template_name = 'news/posts.html'
     context_object_name = 'сategory_list'
+    model = Category
+    paginate_by=1
 
     def get_queryset(self):
         return Category.objects.all()
