@@ -1,8 +1,12 @@
-{% extends "catalog/wrapper.html" %}
+{% extends "mainApp/wrapper.html" %}
 
 {% block content %}
-<p>Просто тестовая страница категорий</p>
-
-{% include "mainApp/includes/some_html.html" %}
+<h1 class="cover-heading">Это сайт с не очень интересными новостями.</h1>
+{% if user.is_authenticated %}
+    <h4>Привет, {{user}}.</h4>
+{% else %}
+    <h4>Если хочешь больше контента, то необходимо авторизоваться.</h4>
+{% endif %}
+<!--{% include "mainApp/includes/some_html.html" %}-->
 
 {% endblock %}

@@ -11,4 +11,4 @@ def contact(request):
     # username = request.POST['username']
     # password = request.POST['password']
     # user = authenticate(request, username=username, password=password)
-	return render(request, 'mainApp/basic.html', {'values':['Если есть вопросы, то не звони', request.POST]})
+	return render(request, 'mainApp/basic.html', {'values':['Если есть вопросы, то не звони', '0699']})
