@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('accounts/', include('registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 	path('news/', include('news.urls')),
     path('', include('mainApp.urls')),
