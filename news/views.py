@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render_to_response
+import django_filters
 
 # @login_required(login_url='/accounts/login/')
 
@@ -19,31 +20,34 @@ class IndexView(generic.ListView):
     # paginate_by=1
     def get_queryset(self, *args, **kwargs):
         context = {}
-
-        category = self.request.GET.get('q')
-        if category is not None:
-            search_category = Category.objects.filter(title__startswith=category)
+        search_category = self.request.GET.get('q')
+        if search_category is not None:
+            list_category = Category.objects.filter(title__icontains=search_category)
 
             # формируем строку URL, которая будет содержать последний запрос
             # Это важно для корректной работы пагинации
-            context['last_category'] = '?q=%s' % category
+            last_category = '?q=%s' % search_category
 
-            current_page = Paginator(search_category, 10)
+            current_page = Paginator(list_category, 10)
 
             page = self.request.GET.get('page')
             try:
-                context['category_list'] = current_page.page(page)
+                category_list = current_page.page(page)
             except PageNotAnInteger:
-                context['category_list'] = current_page.page(1)
+                category_list = current_page.page(1)
             except EmptyPage:
-                context['category_list'] = current_page.page(current_page.num_pages)
+                category_list = current_page.page(current_page.num_pages)
         else:
-            paginate_by=1
             search_category = Category.objects.all()
             current_page = Paginator(search_category, 1)
             page = self.request.GET.get('page')
-            context['category_list'] = current_page.page(1)
-        return render_to_response(template_name=self.template_name, context=context)
+            try:
+                category_list = current_page.page(page)
+            except PageNotAnInteger:
+                category_list = current_page.page(1)
+            except EmptyPage:
+                category_list = current_page.page(current_page.num_pages)
+        return category_list
 
 def detail(request, article_id):
     article = get_object_or_404(Articles, pk=article_id)

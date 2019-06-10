@@ -4,45 +4,96 @@
 	<meta charset="UTF-8">
 	<title>Блог</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<!--	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>-->
+<!--	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'mainApp/css/cover.css' %}" type="text/css">
+<!--    <link rel="stylesheet" href="{% static 'mainApp/css/cover.css' %}" type="text/css">-->
+
+    <!-- Load Roboto font -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!-- Load css styles -->
+<!--    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/bootstrap.css' %}" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/bootstrap-responsive.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/basic.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/pluton.css' %}" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/pluton-ie7.css' %}" />
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/jquery.cslider.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/jquery.bxslider.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/css/animate.css' %}" />
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'mainApp/image/ico/apple-touch-icon-144.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'mainApp/image/ico/apple-touch-icon-114.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'mainApp/image/apple-touch-icon-72.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'mainApp/image/ico/apple-touch-icon-57.png' %}">
+    <link rel="shortcut icon" href="{% static 'mainApp/image/ico/favicon.ico' %}">
 </head>
-<body class="text-center">
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
-        <div class="inner">
-<!--            <h3 class="masthead-brand">Cover</h3>-->
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="/">Home</a>
-                <a class="nav-link" href="/contact">Контакты</a>
-                {% if user.is_authenticated %}
-                    <a class="nav-link" href="/news">Новости</a>
-                    <a class="nav-link" href="{% url 'logout'%}?next=/">Выйти</a>
-                {% else %}
-                    <a class="nav-link" href="{% url 'login'%}?next=/news">Войти</a>
-<!--                    <a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Регистрация</a>-->
-                {% endif %}
-            </nav>
-        </div>
+<body>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <a class="navbar-brand" href="#">Fixed navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="/news">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}?next=/">Sign out</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next=/news">Sign in</a></li>
+    <!--                    <a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Sign up</a>-->
+                    {% endif %}
+                </ul>
+                <!-- Search -->
+                <form action="/news/" class="form-inline mt-2 mt-md-0" method="get">
+                    <div class="input-group">
+                        <input id="search" name="q" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
+        </nav>
     </header>
-
-    <main role="main" class="inner cover">
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>
+    <main role="main" class="flex-shrink-0">
+    {% block content %}
+    {% endblock %}
     </main>
-
-    <footer class="mastfoot mt-auto">
-        <div class="inner">
-            <p> &copy; Все права защищены 2019</p>
-        </div>
-    </footer>
-
-</div>
-
+    <!-- Footer section start -->
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+    </div>
+</footer>
+    <!-- Footer section end -->
+    <!-- ScrollUp button start -->
+    <div class="scrollup">
+        <a href="#">
+            <i class="icon-up-open"></i>
+        </a>
+    </div>
+    <!-- ScrollUp button end -->
+    <!-- Include javascript -->
+    <script src="{% static 'mainApp/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery.mixitup.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/modernizr.custom.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery.bxslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery.cslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery.placeholder.js' %}"></script>
+    <script type="text/javascript" src="{% static 'mainApp/js/jquery.inview.js' %}"></script>
+    <!--[if lt IE 9]>
+    <script src="{% static 'mainApp/js/respond.min.js' %}"></script>
+    <![endif]-->
+    <script type="text/javascript" src="{% static 'mainApp/js/app.js' %}"></script>
 </body>
 </html>
